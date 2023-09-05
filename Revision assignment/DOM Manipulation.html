@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <input id="myInput" type="text" placeholder="Enter Task Name" />
+        <input type="submit" />
+    </form>
+
+    <p id="display"></p>
+</body>
+<script>
+
+    let ainput=document.getElementById("myInput")
+
+    let displaydom=document.getElementById("display")
+
+
+    let myaButton=document.querySelector("form")
+
+    myaButton.addEventListener("submit",function(e){
+        e.preventDefault();
+        alert("displaying the entered value")
+        displaydom.innerText="The entered value :"+ " " +ainput.value;
+    })
+
+    
+    
+
+
+</script>
+</html>
