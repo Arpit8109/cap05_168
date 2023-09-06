@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="display"></h1>
+    <div class="keypad">
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>4</button>
+        <button>5</button>
+        <button>6</button>
+        <button>7</button>
+        <button>8</button>
+        <button>9</button>
+        <button>0</button>
+    </div>
+    <div class="oprators">
+        <button>+</button>
+        <button>-</button>
+        <button>*</button>
+        <button>/</button>
+    </div>
+    <div class="equal">
+        <button>=</button>
+    </div>
+
+</body>
+<script>
+    let displayheading=document.getElementById("display");
+    let keypadbutton=document.querySelectorAll(".keypad>button")
+    let opratorsbutton=document.querySelectorAll(".oprators>button")
+    let equal=document.querySelector(".equal>button")
+
+    let firstNumber="";
+    let secondNumber="";
+    let isFirstNumber=true;
+    let operatorselect="";
+
+    keypadbutton.forEach((e)=>{
+       e.addEventListener("click",function(){
+        if(isFirstNumber==true){
+            firstNumber+=e.innerHTML;
+            displayheading.innerText=firstNumber
+        }else{
+            secondNumber+=e.innerHTML;
+            displayheading.innerText=secondNumber
+        }
+       })
+    })
+
+    opratorsbutton.forEach((e)=>{
+        e.addEventListener("click",function(ab){
+            isFirstNumber=false;
+            operatorselect=ab.target.innerText;
+            console.log(operatorselect)
+        })
+    })
+
+    equal.addEventListener("click",function(){
+        displayheading.innerText=calculator(firstNumber,secondNumber,operatorselect)
+    })
+
+    function calculator(firstNumber,secondNumber,operatorselect){
+        switch(operatorselect){
+            case "+":
+                return (Number(firstNumber)+Number(secondNumber))
+            case "-":
+                return (Number(firstNumber)-Number(secondNumber))
+            case "/":
+                return (Number(firstNumber)/Number(secondNumber))
+            case "*":
+                return (Number(firstNumber)*Number(secondNumber))
+        }
+        
+        
+    }
+</script>
+</html>
