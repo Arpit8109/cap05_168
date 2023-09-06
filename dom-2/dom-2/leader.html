@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Masai Games</title>
+    <style>
+      #min{
+        border: 1px solid red;
+        height: 50px;
+        width: 50px;
+      }
+      #max{
+        border: 1px solid blue;
+        height: 50px;
+        width: 50px;
+      }
+      #score{
+        border: 1px solid green;
+        height: 50px;
+        width: 50px;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <div id="min"></div>
+    <div id="max"></div>
+    <div id="score">
+    </div>
+    <div id="keypad">
+      <button>0</button>
+      <button>1</button>
+      <button>2</button>
+      <button>3</button>
+      <button>4</button>
+      <button>5</button>
+      <button>6</button>
+      <button>7</button>
+      <button>8</button>
+      <button>9</button>
+    </div>
+    <button id="enter">ENTER</button>
+  </body>
+  <script>
+    let minEl=document.getElementById("min")
+    let maxEl=document.getElementById("max")
+    let scoreEl=document.getElementById("score")
+    let enterEl=document.getElementById("enter")
+    let keypadEl=document.querySelectorAll("#keypad > button")
+
+    for(let i=0;i<keypadEl.length;i++){
+
+      keypadEl[i].addEventListener("click",function(){
+        scoreEl.innerText+=keypadEl[i].innerText
+      })
+    }
+
+    enterEl.addEventListener("click",function(){
+      if(minEl.innerText=="" && maxEl.innerText==""){
+        minEl.innerText=scoreEl.innerText
+        maxEl.innerText=scoreEl.innerText
+      }else if(+scoreEl.innerText>+maxEl.innerText){
+        maxEl.innerText=scoreEl.innerText;
+      }else if(+scoreEl.innerText<+minEl.innerText){
+        minEl.innerText=scoreEl.innerText;
+      }
+
+      scoreEl.innerText="";
+    })
+
+  </script>
+</html>
