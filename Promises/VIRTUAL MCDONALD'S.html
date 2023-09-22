@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virual McDonald's</title>
+    <style>
+        body{
+            background-color: yellowgreen;
+            border: 5px dotted brown;;
+        }
+        *{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+      h2{
+          text-align: center;
+          color:brown;
+      }
+ #checkboxContainer{
+     height:300px;
+     width:40%;
+     border:1px solid black;
+     margin:auto;
+     margin-top:10px;   
+     background-image: url("https://www.mcdonalds.com/content/dam/sites/usa/nfl/publication/1PUB_Loyalty_FLFv2_1168x520.jpg");
+      background-size: cover;
+      margin-top: -2.5%;
+ 
+    }  
+ #checkboxContainer>div{
+    box-sizing: border-box;
+    padding-left: 50px;
+       
+ }
+ #checkboxContainer>div>input{
+     margin-bottom: 10px;
+    
+ }
+ #checkboxContainer>div>label{
+    font-size: 20px;
+    color: white;
+ }
+ button{
+     border:none;
+     font-size: 17px;
+     padding: 10px 14px;
+     background-color: white;
+     color:brown;
+     font-weight: bolder;
+     margin-top: 30px;
+     border: 2px solid brown;
+     border-radius: 5px;
+    
+     
+ }
+
+    </style>
+</head>
+<body>
+
+    <div id="orderId"></div>
+    <div id="checkboxContainer">
+        <h2>Select Your Food</h2>
+          <div>
+              <input type="checkbox" id="beverage" class="selectFood" value="Beverage">
+               <label for="beverage">Beverage</label> <br>
+               <input type="checkbox" id="breakfast" class="selectFood" value="Breakfast">
+               <label for="breakfast">Breakfast</label> <br>
+               <input type="checkbox" id="burgers" class="selectFood" value="Burgers">
+              <label for="burgers">Burgers</label> <br>
+              <input type="checkbox" id="combo_meal" class="selectFood" value="Combo Meal">
+              <label for="combo_meal">Combo Meal</label> <br>
+             <button onclick="orderFood()">Order Food</button>
+         </div>
+ </div>
+
+    <h2>Please Get your Food Here</h2>
+<div id="container">
+
+
+</div>
+
+</body>
+</html>
+<script>
+function orderFood() {
+  let select = document.querySelectorAll(".selectFood");
+
+  let selectedArr = [];
+  for (let i = 0; select[i]; i++) {
+    if (select[i].checked) {
+      selectedArr.push(select[i].value);
+    }
+  }
+  //console.log(selectedArr)
+
+  function checkSatus() {
+    if (selectedArr.length !== 0) {
+      console.log(true);
+      return true;
+    } else {
+      console.log(false);
+      return false;
+    }
+  }
+
+  let myPromise = new Promise(function (resolve, reject) {
+    let checkedStatus = checkSatus();
+
+    if (checkedStatus) {
+      let time = Math.floor(Math.random() * 6000);
+      setTimeout(function () {
+        resolve();
+      }, time);
+    } else {
+      reject("Please Select some food Before Passing your ORDER.");
+    }
+  });
+
+  let box = document.querySelector("#container");
+  let subBox = document.createElement("div");
+  myPromise.then(function () {
+    for (let i = 0; i < selectedArr.length; i++) {
+      if (selectedArr[i] === "Beverage") {
+        let sub = document.createElement("img");
+        sub.src =
+          "https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-hot-tea:1-4-product-tile-desktop";
+
+        subBox.append(sub);
+        box.append(subBox);
+      }
+
+      if (selectedArr[i] === "Breakfast") {
+        let sub = document.createElement("img");
+        sub.src =
+          "https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-Big-Breakfast-with-Hotcakes-Regular-Size-Biscuit-1:1-4-product-tile-desktop";
+        subBox.append(sub);
+        box.append(subBox);
+      }
+
+      if (selectedArr[i] === "Burgers") {
+        let sub = document.createElement("img");
+        sub.src =
+          "https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-Double-Quarter-Pounder-with-Cheese-1:1-4-product-tile-desktop";
+        subBox.append(sub);
+        box.append(subBox);
+      }
+
+      if (selectedArr[i] === "Combo Meal") {
+        let sub = document.createElement("img");
+        sub.src =
+          "https://s7d1.scene7.com/is/image/mcdonalds/h-mcdonalds-2-Cheeseburger-Extra-Value-Meals:1-4-product-tile-desktop";
+        subBox.append(sub);
+        box.append(subBox);
+      }
+    }
+    let orderId = Math.floor(Math.random() * 500000);
+    document.querySelector("#orderId").append(`Your orderId is- '${orderId}'`);
+  });
+  box.innerHTML = null;
+
+  myPromise.catch(function (err) {
+    alert(err);
+  });
+}
+</script>
